@@ -1,0 +1,10 @@
+name: Mails
+form: $/pensoft/getinvolved/models/data/fields.yaml
+modelClass: Pensoft\GetInvolved\Models\Data
+defaultRedirect: pensoft/getinvolved/mails
+create:
+    redirect: 'pensoft/getinvolved/mails/update/:id'
+    redirectClose: pensoft/getinvolved/mails
+update:
+    redirect: pensoft/getinvolved/mails
+    redirectClose: pensoft/getinvolved/mails

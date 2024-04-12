@@ -1,0 +1,24 @@
+plugin:
+    name: 'pensoft.getinvolved::lang.plugin.name'
+    description: 'pensoft.getinvolved::lang.plugin.description'
+    author: Pensoft
+    icon: icon-external-link-square
+    homepage: ''
+navigation:
+    getinvolved:
+        label: 'Get Involved'
+        url: pensoft/getinvolved/mails
+        icon: icon-external-link-square
+        sideMenu:
+            side-menu-item2:
+                label: Mails
+                url: pensoft/getinvolved/mails
+                icon: icon-envelope
+            side-menu-item3:
+                label: Recipients
+                url: pensoft/getinvolved/recipients
+                icon: icon-user-secret
+            side-menu-item:
+                label: Interests
+                url: pensoft/getinvolved/interests
+                icon: icon-star-o

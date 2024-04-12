@@ -1,0 +1,16 @@
+1.0.1: 'First version of GetInvolved'
+1.0.2:
+    - 'Created table pensoft_getinvolved_data'
+    - builder_table_create_pensoft_getinvolved_data.php
+1.0.3:
+    - 'Created table pensoft_getinvolved_interest'
+    - builder_table_create_pensoft_getinvolved_interest.php
+1.0.4:
+    - 'Created table pensoft_getinvolved_recipients'
+    - builder_table_create_pensoft_getinvolved_recipients.php
+1.0.5:
+    - 'Updated table pensoft_getinvolved_data'
+    - builder_table_update_pensoft_getinvolved_data.php
+1.0.6:
+    - 'Updated table pensoft_getinvolved_data'
+    - builder_table_update_pensoft_getinvolved_data_2.php

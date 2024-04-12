@@ -1,0 +1,10 @@
+name: Interests
+form: $/pensoft/getinvolved/models/interest/fields.yaml
+modelClass: Pensoft\GetInvolved\Models\Interest
+defaultRedirect: pensoft/getinvolved/interests
+create:
+    redirect: 'pensoft/getinvolved/interests/update/:id'
+    redirectClose: pensoft/getinvolved/interests
+update:
+    redirect: pensoft/getinvolved/interests
+    redirectClose: pensoft/getinvolved/interests

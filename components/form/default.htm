@@ -1,0 +1,94 @@
+<form method="post"
+      data-request="{{__SELF__}}::onSubmit"
+      data-request-files
+      data-request-validate
+      data-request-flash
+>
+    <input type="hidden" name="_handler" value="onSubmit">
+    {{ form_token() }}
+    {{ form_sessionKey() }}
+    <div id="error_messages">
+        {% flash error %}
+        <p>{{ message }}</p>
+        {% endflash %}
+    </div>
+    <div class="ui form get_involved_form">
+        <input name="profile" type="hidden" value="1">
+        <div class="row between-md around-xs">
+            <div class="col-md-6 col-xs-12 field">
+                <label for="name">Name <span class="red">*</span> </label>
+                <input name="name" type="text" class="" id="name" value="" placeholder="First and Last names" required>
+            </div>
+
+            <div class="col-md-6 col-xs-12 field">
+                <label for="email">Email address <span class="red">*</span></label>
+                <input name="email" type="email" class="" id="email" value="" placeholder="Email address" required>
+            </div>
+
+            <div class="col-md-6 col-xs-12 field">
+                <label for="affiliation">Affiliation <span class="red">*</span> </label>
+                <input name="affiliation" type="text" class="" id="affiliation" value="" placeholder="Name of institute a representative of" required>
+            </div>
+
+            <div class="col-md-6 col-xs-12 field">
+                <label for="country">Country <span class="red">*</span></label>
+                <select id="country" name="country" required>
+                    <option value="">-- Choose --</option>
+                    {% for country in countries %}
+                    <option value="{{ country.id }}">{{ country.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-6 col-xs-12 field">
+                <label for="main_language">Main language <span class="red">*</span> </label>
+                <input name="main_language" type="text" class="" id="main_language" value="" placeholder="Main language" required>
+            </div>
+
+            <div class="col-md-6 col-xs-12 field">
+                <label for="second_language">Second language <span class="red">*</span></label>
+                <input name="second_lanuage" type="text" class="" id="second_language" value="" placeholder="Second language" required>
+            </div>
+
+            <div class="col-md-12 col-xs-12 field">
+                <label for="interest">Interest in PollinERA <span class="red">*</span></label>
+                <div class="row" id="interest">
+                    <div class="col-md-12 col-xs-12 getinvolved_form_accordion">
+                        <div class="accordion-border"><!-- 1 --><!-- css 1 -->
+                            <div class="row middle-xs accordion-toggle">
+                                <div class="col-xs-11">Select interest</div>
+                                <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
+                            </div>
+
+                            <div class="accordion-content field" style="display: none;">
+                                {% for item in interests %}
+                                <label><input name="interest[]" type="checkbox" value="{{ item.id }}">{{ item.name }}</label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-xs-12 field privacy_policy_text_field">
+                <p>* Please read our <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a> to learn how we will use and protect your personal data.</p>
+            </div>
+
+            <div class="col-md-12 col-xs-12 field">
+                <label><input name="agree" type="checkbox" value="1">I agree with the PollinERA <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a>.</label>
+            </div>
+
+            <div class="col-md-12 col-xs-12 field">
+                <div class="g-recaptcha" id="recaptcha" data-sitekey="{{__SELF__.property('recaptcha_key')}}"></div>
+            </div>
+
+            <div class="col-md-12 col-xs-12 mt-1 text-center">
+                <button type="submit" class="btn btn-primary" style="min-width: 100px;">Register</button>
+            </div>
+            <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+        </div>
+    </div>
+</form>
+
+{% framework extras %}
+{% scripts %}

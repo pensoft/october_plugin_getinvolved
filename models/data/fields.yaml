@@ -1,0 +1,33 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    email:
+        label: Email
+        span: auto
+        type: text
+    affiliation:
+        label: Affiliation
+        span: auto
+        type: text
+    country:
+        label: Country
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    main_language:
+        label: 'Main language'
+        span: auto
+        type: text
+    second_language:
+        label: 'Second language'
+        span: auto
+        type: text
+    interest:
+        label: Interest
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
