@@ -9,6 +9,7 @@ use Pensoft\GetInvolved\Models\Recipient;
 use Multiwebinc\Recaptcha\Validators\RecaptchaValidator;
 use Pensoft\Tdwgform\Models\Data;
 use RainLab\Location\Models\Country;
+use Cms\Classes\Theme;
 
 /**
  * Form Component
@@ -43,6 +44,7 @@ class Form extends ComponentBase
     public function onRun() {
         $this->page['countries'] = $this->countries();
         $this->page['interests'] = $this->interests();
+        $this->page['themeName'] = Theme::getActiveTheme()->getConfig()['name'];
     }
 
     public function countries() {
