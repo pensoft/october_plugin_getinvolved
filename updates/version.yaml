@@ -14,3 +14,6 @@
 1.0.6:
     - 'Updated table pensoft_getinvolved_data'
     - builder_table_update_pensoft_getinvolved_data_2.php
+1.0.7:
+    - 'Created table pensoft_getinvolved_data_interest'
+    - builder_table_create_pensoft_getinvolved_data_interest.php

@@ -37,7 +37,7 @@ class Data extends Model
     /**
      * @var array jsonable attribute names that are json encoded and decoded from the database
      */
-    protected $jsonable = ['interest'];
+//    protected $jsonable = ['interest'];
 
     /**
      * @var array appends attributes to the API representation of the model (ex. toArray())
@@ -64,7 +64,7 @@ class Data extends Model
     public $belongsToMany = [
         'interest' => [
             'Pensoft\GetInvolved\Models\Interest',
-            'table' => 'pensoft_getinvolved_interest',
+            'table' => 'pensoft_getinvolved_data_interest',
             'order' => 'name'
         ],
     ];

@@ -3,11 +3,11 @@
 use Cms\Classes\ComponentBase;
 use Illuminate\Support\Facades\Mail;
 use October\Rain\Support\Facades\Flash;
+use Pensoft\GetInvolved\Models\Data;
 use Pensoft\GetInvolved\Models\Interest;
 use Pensoft\GetInvolved\Models\Data as MailsData;
 use Pensoft\GetInvolved\Models\Recipient;
 use Multiwebinc\Recaptcha\Validators\RecaptchaValidator;
-use Pensoft\Tdwgform\Models\Data;
 use RainLab\Location\Models\Country;
 use Cms\Classes\Theme;
 
@@ -63,7 +63,7 @@ class Form extends ComponentBase
         $affiliation = \Input::get('affiliation');
         $country = \Input::get('country');
         $main_language = \Input::get('main_language');
-        $second_lanuage = \Input::get('second_lanuage');
+        $second_language = \Input::get('second_language');
         $interest = \Input::get('interest');
         $agree = \Input::get('agree');
 
@@ -75,7 +75,7 @@ class Form extends ComponentBase
                 'affiliation' => $affiliation,
                 'country' => $country,
                 'main_language' => $main_language,
-                'second_lanuage' => $second_lanuage,
+                'second_language' => $second_language,
                 'interest' => $interest,
                 'agree' => $agree,
 //                'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
@@ -86,7 +86,8 @@ class Form extends ComponentBase
                 'affiliation' => 'required|string|min:2',
                 'country' => 'required',
                 'main_language' => 'required|string|min:2',
-                'second_lanuage' => 'required|string|min:2',
+                'second_language' => 'required|string|min:2',
+                'interest' => 'required',
                 'agree' => 'required',
 //                'g-recaptcha-response' => [
 //                    'required',
@@ -95,8 +96,20 @@ class Form extends ComponentBase
             ]
         );
 
+        $errArray = [
+            "agree" => "Please check the \"I agree with the " . Theme::getActiveTheme()->getConfig()['name'] . " privacy policy\" field.",
+        ];
+
+
         if($validator->fails()){
-            Flash::error($validator->messages()->first());
+            foreach ($validator->messages()->toArray() as $k => $e){
+                if(isset($errArray[$k])){
+                    Flash::error($errArray[$k]);
+                }else{
+                    Flash::error($validator->messages()->first());
+                }
+                return ['scroll_to_field' => $validator->messages()->toArray()];
+            }
         }else{
             $recipientsData = Recipient::first()->toArray();
             $recipientsEmails = explode(',', $recipientsData['emails']);
@@ -109,9 +122,8 @@ class Form extends ComponentBase
                 'affiliation' => $affiliation,
                 'country' => $this->getCountryName($country),
                 'main_language' => $main_language,
-                'second_language' => $second_lanuage,
-                'interest' => '',
-//                'interest' => $this->getInterestName($interest),
+                'second_language' => $second_language,
+                'interest' => $this->getInterestName($interest),
             ];
 
             // send mail to user submitting the form
@@ -135,9 +147,16 @@ class Form extends ComponentBase
             $data->affiliation =  $affiliation;
             $data->country_id = (int)$country;
             $data->main_language = $main_language;
-            $data->second_language = $second_lanuage;
-//            $data->interest = json_encode($interest);
+            $data->second_language = $second_language;
             $data->save();
+
+            $recordID = $data->id;
+
+            foreach ($interest as $item){
+                $mailData = Data::find($recordID);
+                $mailData->interest()->attach($item);
+            }
+
 
             Flash::success($this->property('message_label'));
 
@@ -153,14 +172,15 @@ class Form extends ComponentBase
         }
         return '';
     }
-//    private function getInterestName($ids) {
-//        $interests = Interest::whereIn('id', $ids)->get()->toArray();
-//        $arr = [];
-//        if(count($interests)){
-//            foreach ($interests as $interest){
-//                $arr[] = $interest['name'];
-//            }
-//        }
-//        return implode(', ', $arr);
-//    }
+
+    private function getInterestName($ids) {
+        $interests = Interest::whereIn('id', $ids)->get()->toArray();
+        $arr = [];
+        if(count($interests)){
+            foreach ($interests as $interest){
+                $arr[] = $interest['name'];
+            }
+        }
+        return implode(', ', $arr);
+    }
 }

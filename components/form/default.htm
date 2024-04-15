@@ -3,6 +3,9 @@
       data-request-files
       data-request-validate
       data-request-flash
+      data-request-success="scrollToField(data)"
+      class="get_involved_form_class"
+      data-request-loading="#loading"
 >
     <input type="hidden" name="_handler" value="onSubmit">
     {{ form_token() }}
@@ -17,22 +20,22 @@
         <div class="row between-md around-xs">
             <div class="col-md-6 col-xs-12 field">
                 <label for="name">Name <span class="red">*</span> </label>
-                <input name="name" type="text" class="" id="name" value="" placeholder="First and Last names" required>
+                <input name="name" type="text" class="" id="name" value="" placeholder="First and Last names">
             </div>
 
             <div class="col-md-6 col-xs-12 field">
                 <label for="email">Email address <span class="red">*</span></label>
-                <input name="email" type="email" class="" id="email" value="" placeholder="Email address" required>
+                <input name="email" type="text" class="" id="email" value="" placeholder="Email address">
             </div>
 
             <div class="col-md-6 col-xs-12 field">
                 <label for="affiliation">Affiliation <span class="red">*</span> </label>
-                <input name="affiliation" type="text" class="" id="affiliation" value="" placeholder="Name of institute a representative of" required>
+                <input name="affiliation" type="text" class="" id="affiliation" value="" placeholder="Name of institute a representative of">
             </div>
 
             <div class="col-md-6 col-xs-12 field">
                 <label for="country">Country <span class="red">*</span></label>
-                <select id="country" name="country" required>
+                <select id="country" name="country">
                     <option value="">-- Choose --</option>
                     {% for country in countries %}
                     <option value="{{ country.id }}">{{ country.name }}</option>
@@ -42,12 +45,12 @@
 
             <div class="col-md-6 col-xs-12 field">
                 <label for="main_language">Main language <span class="red">*</span> </label>
-                <input name="main_language" type="text" class="" id="main_language" value="" placeholder="Main language" required>
+                <input name="main_language" type="text" class="" id="main_language" value="" placeholder="Main language">
             </div>
 
             <div class="col-md-6 col-xs-12 field">
                 <label for="second_language">Second language <span class="red">*</span></label>
-                <input name="second_lanuage" type="text" class="" id="second_language" value="" placeholder="Second language" required>
+                <input name="second_language" type="text" class="" id="second_language" value="" placeholder="Second language">
             </div>
 
             <div class="col-md-12 col-xs-12 field">
@@ -70,11 +73,8 @@
                 </div>
             </div>
 
-            <div class="col-md-12 col-xs-12 field privacy_policy_text_field">
-                <p>* Please read our <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a> to learn how we will use and protect your personal data.</p>
-            </div>
-
             <div class="col-md-12 col-xs-12 field">
+                <p class="privacy_policy_text_field">* Please read our <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a> to learn how we will use and protect your personal data.</p>
                 <label><input name="agree" type="checkbox" value="1">I agree with the {{themeName}} <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a>.</label>
             </div>
 
@@ -92,3 +92,5 @@
 
 {% framework extras %}
 {% scripts %}
+
+<div id="loading" class="loader" style="display: none;"></div>
