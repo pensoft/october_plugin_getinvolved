@@ -62,10 +62,12 @@ class Form extends ComponentBase
         $email = \Input::get('email');
         $affiliation = \Input::get('affiliation');
         $country = \Input::get('country');
-        $main_language = \Input::get('main_language');
-        $second_language = \Input::get('second_language');
+//        $main_language = \Input::get('main_language');
+//        $second_language = \Input::get('second_language');
         $interest = \Input::get('interest');
         $agree = \Input::get('agree');
+        $project_events = \Input::get('project_events');
+        $external_events = \Input::get('external_events');
 
 
         $validator = \Validator::make(
@@ -74,31 +76,31 @@ class Form extends ComponentBase
                 'email' => $email,
                 'affiliation' => $affiliation,
                 'country' => $country,
-                'main_language' => $main_language,
-                'second_language' => $second_language,
+//                'main_language' => $main_language,
+//                'second_language' => $second_language,
                 'interest' => $interest,
-                'agree' => $agree,
-//                'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
+//                'agree' => $agree,
+                'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
             ],
             [
                 'name' => 'required|string|min:2',
                 'email' => 'required|min:6|email',
                 'affiliation' => 'required|string|min:2',
                 'country' => 'required',
-                'main_language' => 'required|string|min:2',
-                'second_language' => 'required|string|min:2',
+//                'main_language' => 'required|string|min:2',
+//                'second_language' => 'required|string|min:2',
                 'interest' => 'required',
-                'agree' => 'required',
-//                'g-recaptcha-response' => [
-//                    'required',
-//                    new RecaptchaValidator,
-//                ],
+//                'agree' => 'required',
+                'g-recaptcha-response' => [
+                    'required',
+                    new RecaptchaValidator,
+                ],
             ]
         );
 
-        $errArray = [
-            "agree" => "Please check the \"I agree with the " . Theme::getActiveTheme()->getConfig()['name'] . " privacy policy\" field.",
-        ];
+//        $errArray = [
+//            "agree" => "Please check the \"I agree with the " . Theme::getActiveTheme()->getConfig()['name'] . " privacy policy\" field.",
+//        ];
 
 
         if($validator->fails()){
@@ -121,9 +123,11 @@ class Form extends ComponentBase
                 'email' => $email,
                 'affiliation' => $affiliation,
                 'country' => $this->getCountryName($country),
-                'main_language' => $main_language,
-                'second_language' => $second_language,
+//                'main_language' => $main_language,
+//                'second_language' => $second_language,
                 'interest' => $this->getInterestName($interest),
+                'project_events' => $project_events ? 'I consent to receive invitations and information about PollinERA events.' : '',
+                'external_events' => $external_events ? 'I consent to receive invitations and information about relevant events from external projects.' : '',
             ];
 
             // send mail to user submitting the form
@@ -146,8 +150,10 @@ class Form extends ComponentBase
             $data->country = $this->getCountryName($country);
             $data->affiliation =  $affiliation;
             $data->country_id = (int)$country;
-            $data->main_language = $main_language;
-            $data->second_language = $second_language;
+//            $data->main_language = $main_language;
+//            $data->second_language = $second_language;
+            $data->project_events = $project_events;
+            $data->external_events = $external_events;
             $data->save();
 
             $recordID = $data->id;
@@ -156,7 +162,6 @@ class Form extends ComponentBase
                 $mailData = Data::find($recordID);
                 $mailData->interest()->attach($item);
             }
-
 
             Flash::success($this->property('message_label'));
 

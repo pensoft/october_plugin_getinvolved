@@ -29,5 +29,13 @@ fields:
         label: Interests
         nameFrom: name
         descriptionFrom: description
-        span: auto
+        span: full
         type: relation
+    project_events:
+        label: 'I consent to receive invitations and information about PollinERA events.'
+        span: auto
+        type: switch
+    external_events:
+        label: 'I consent to receive invitations and information about relevant events from external projects.'
+        span: auto
+        type: switch
