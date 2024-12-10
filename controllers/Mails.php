@@ -23,6 +23,8 @@ class Mails extends Controller
      */
     public $listConfig = 'config_list.yaml';
 
+    public $requiredPermissions = ['pensoft.getinvolved.all'];
+
     /**
      * __construct the controller
      */

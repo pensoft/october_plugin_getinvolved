@@ -1,6 +1,8 @@
 <?php namespace Pensoft\GetInvolved;
 
 use Backend;
+use Pensoft\Accordions\Controllers\Accordions;
+use Pensoft\Accordions\Models\Category;
 use System\Classes\PluginBase;
 
 /**
@@ -40,7 +42,20 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-
+        \Event::listen('backend.menu.extendItems', function($navigationManager) {
+            $user = \BackendAuth::getUser(); // get the logged in user
+            if(!$user->is_superuser){
+                $navigationManager->removeMainMenuItem('October.System', 'system');
+                $navigationManager->removeMainMenuItem('Pensoft.Cardprofiles', 'profile-cards');
+                $navigationManager->removeMainMenuItem('Pensoft.Calendar', 'main-menu-item');
+                $navigationManager->removeMainMenuItem('Pensoft.Accordions', 'main-menu-item');
+                $navigationManager->removeMainMenuItem('Pensoft.Partners', 'main-menu-item');
+                $navigationManager->removeMainMenuItem('Pensoft.Media', 'media-center');
+                $navigationManager->removeMainMenuItem('Pensoft.Articles', 'main-menu-item');
+                $navigationManager->removeMainMenuItem('Pensoft.Library', 'main-menu-item');
+                $navigationManager->removeMainMenuItem('Pensoft.Jumbotron', 'main-menu-item');
+            }
+        });
     }
 
     /**
@@ -62,10 +77,9 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
 
         return [
-            'pensoft.getinvolved.some_permission' => [
+            'pensoft.getinvolved.all' => [
                 'tab' => 'GetInvolved',
                 'label' => 'Permission GetInvolved'
             ],

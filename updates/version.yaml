@@ -20,3 +20,5 @@
 1.0.8:
     - 'Updated table pensoft_getinvolved_data'
     - builder_table_update_pensoft_getinvolved_data_3.php
+1.0.9:
+    - 'Hide menu modules if not superuser'
