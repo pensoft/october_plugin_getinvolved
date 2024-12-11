@@ -22,3 +22,15 @@
     - builder_table_update_pensoft_getinvolved_data_3.php
 1.0.9:
     - 'Hide menu modules if not superuser'
+1.0.10:
+    - 'Updated table pensoft_getinvolved_interest'
+    - builder_table_update_pensoft_getinvolved_interest.php
+1.0.11:
+    - 'Created table pensoft_getinvolved_categories'
+    - builder_table_create_pensoft_getinvolved_categories.php
+1.0.12:
+    - 'Created table pensoft_getinvolved_data_categories'
+    - builder_table_create_pensoft_getinvolved_data_categories.php
+1.0.13:
+    - 'Updated table pensoft_getinvolved_data_categories'
+    - builder_table_update_pensoft_getinvolved_data_categories.php

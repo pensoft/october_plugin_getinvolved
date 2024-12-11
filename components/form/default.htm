@@ -45,6 +45,27 @@
 
 
             <div class="col-md-12 col-xs-12 field">
+                <label for="category">Select the category/categories which best describe you <span class="red">*</span></label>
+                <div class="row" id="category">
+                    <div class="col-md-12 col-xs-12 getinvolved_form_accordion">
+                        <div class="accordion-border"><!-- 1 --><!-- css 1 -->
+                            <div class="row middle-xs accordion-toggle">
+                                <div class="col-xs-11">Select category</div>
+                                <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
+                            </div>
+
+                            <div class="accordion-content field" style="display: none;">
+                                {% for item in categories %}
+                                <label><input name="category[]" type="checkbox" value="{{ item.id }}">{{ item.name }}</label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 col-xs-12 field">
                 <label for="interest">Interest in {{themeName}} <span class="red">*</span></label>
                 <div class="row" id="interest">
                     <div class="col-md-12 col-xs-12 getinvolved_form_accordion">

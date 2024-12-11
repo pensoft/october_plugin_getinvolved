@@ -22,3 +22,7 @@ navigation:
                 label: Interests
                 url: pensoft/getinvolved/interests
                 icon: icon-star-o
+            side-menu-item4:
+                label: 'Categories of interest'
+                url: pensoft/getinvolved/categories
+                icon: icon-smile-o

@@ -1,0 +1,10 @@
+name: Categories
+form: $/pensoft/getinvolved/models/category/fields.yaml
+modelClass: Pensoft\GetInvolved\Models\Category
+defaultRedirect: pensoft/getinvolved/categories
+create:
+    redirect: 'pensoft/getinvolved/categories/update/:id'
+    redirectClose: pensoft/getinvolved/categories
+update:
+    redirect: pensoft/getinvolved/categories
+    redirectClose: pensoft/getinvolved/categories

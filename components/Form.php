@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use October\Rain\Support\Facades\Flash;
 use Pensoft\GetInvolved\Models\Data;
 use Pensoft\GetInvolved\Models\Interest;
+use Pensoft\GetInvolved\Models\Category;
 use Pensoft\GetInvolved\Models\Data as MailsData;
 use Pensoft\GetInvolved\Models\Recipient;
 use Multiwebinc\Recaptcha\Validators\RecaptchaValidator;
@@ -44,6 +45,7 @@ class Form extends ComponentBase
     public function onRun() {
         $this->page['countries'] = $this->countries();
         $this->page['interests'] = $this->interests();
+        $this->page['categories'] = $this->categories();
         $this->page['themeName'] = Theme::getActiveTheme()->getConfig()['name'];
     }
 
@@ -53,7 +55,11 @@ class Form extends ComponentBase
 
 
     public function interests() {
-        return Interest::orderBy('id')->get();
+        return Interest::get();
+    }
+
+    public function categories() {
+        return Category::get();
     }
 
     public function onSubmit(){
@@ -65,6 +71,7 @@ class Form extends ComponentBase
 //        $main_language = \Input::get('main_language');
 //        $second_language = \Input::get('second_language');
         $interest = \Input::get('interest');
+        $category = \Input::get('category');
         $agree = \Input::get('agree');
         $project_events = \Input::get('project_events');
         $external_events = \Input::get('external_events');
@@ -79,6 +86,7 @@ class Form extends ComponentBase
 //                'main_language' => $main_language,
 //                'second_language' => $second_language,
                 'interest' => $interest,
+                'category' => $category,
 //                'agree' => $agree,
                 'g-recaptcha-response' => \Input::get('g-recaptcha-response'),
             ],
@@ -89,6 +97,8 @@ class Form extends ComponentBase
                 'country' => 'required',
 //                'main_language' => 'required|string|min:2',
 //                'second_language' => 'required|string|min:2',
+
+                'category' => 'required',
                 'interest' => 'required',
 //                'agree' => 'required',
                 'g-recaptcha-response' => [
@@ -126,6 +136,7 @@ class Form extends ComponentBase
 //                'main_language' => $main_language,
 //                'second_language' => $second_language,
                 'interest' => $this->getInterestName($interest),
+                'category' => $this->getCategoryName($category),
                 'project_events' => $project_events ? 'I consent to receive invitations and information about PollinERA events.' : '',
                 'external_events' => $external_events ? 'I consent to receive invitations and information about relevant events from external projects.' : '',
             ];
@@ -162,6 +173,10 @@ class Form extends ComponentBase
                 $mailData = Data::find($recordID);
                 $mailData->interest()->attach($item);
             }
+            foreach ($category as $item){
+                $mailData = Data::find($recordID);
+                $mailData->category()->attach($item);
+            }
 
             Flash::success($this->property('message_label'));
 
@@ -184,6 +199,17 @@ class Form extends ComponentBase
         if(count($interests)){
             foreach ($interests as $interest){
                 $arr[] = $interest['name'];
+            }
+        }
+        return implode(', ', $arr);
+    }
+
+    private function getCategoryName($ids) {
+        $categories = Category::whereIn('id', $ids)->get()->toArray();
+        $arr = [];
+        if(count($categories)){
+            foreach ($categories as $category){
+                $arr[] = $category['name'];
             }
         }
         return implode(', ', $arr);

@@ -17,20 +17,19 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
-    main_language:
-        label: 'Main language'
-        span: auto
-        type: text
-    second_language:
-        label: 'Second language'
-        span: auto
-        type: text
     interest:
         label: Interests
         nameFrom: name
         descriptionFrom: description
-        span: full
+        span: left
         type: relation
+    category:
+        label: 'Category/categories of interest'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        comment: 'Select the category/categories which best describe you.'
     project_events:
         label: 'I consent to receive invitations and information about PollinERA events.'
         span: auto

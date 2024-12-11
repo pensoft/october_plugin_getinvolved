@@ -67,6 +67,11 @@ class Data extends Model
             'table' => 'pensoft_getinvolved_data_interest',
             'order' => 'name'
         ],
+        'category' => [
+            'Pensoft\GetInvolved\Models\Category',
+            'table' => 'pensoft_getinvolved_data_categories',
+            'order' => 'name',
+        ],
     ];
 
     /**

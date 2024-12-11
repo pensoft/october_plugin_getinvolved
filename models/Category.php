@@ -6,7 +6,7 @@ use October\Rain\Database\Traits\Sortable;
 /**
  * Model
  */
-class Interest extends Model
+class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
@@ -20,7 +20,7 @@ class Interest extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'pensoft_getinvolved_interest';
+    public $table = 'pensoft_getinvolved_categories';
 
     /**
      * @var array Validation rules

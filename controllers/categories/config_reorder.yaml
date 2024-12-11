@@ -1,0 +1,6 @@
+title: Categories
+modelClass: Pensoft\GetInvolved\Models\Category
+toolbar:
+    buttons: reorder_toolbar
+
+orderColumn: sort_order
