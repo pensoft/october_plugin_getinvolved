@@ -137,7 +137,7 @@ class Form extends ComponentBase
 //                'second_language' => $second_language,
                 'interest' => $this->getInterestName($interest),
                 'category' => $this->getCategoryName($category),
-                'project_events' => $project_events ? 'I consent to receive invitations and information about PollinERA events.' : '',
+                'project_events' => $project_events ? 'I consent to receive invitations and information about ' . Theme::getActiveTheme()->getConfig()['name'] . ' events.' : '',
                 'external_events' => $external_events ? 'I consent to receive invitations and information about relevant events from external projects.' : '',
             ];
 

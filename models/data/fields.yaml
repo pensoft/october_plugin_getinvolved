@@ -31,7 +31,7 @@ fields:
         type: relation
         comment: 'Select the category/categories which best describe you.'
     project_events:
-        label: 'I consent to receive invitations and information about PollinERA events.'
+        label: 'I consent to receive invitations and information about project events.'
         span: auto
         type: switch
     external_events:

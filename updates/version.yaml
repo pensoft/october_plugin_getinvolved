@@ -34,3 +34,5 @@
 1.0.13:
     - 'Updated table pensoft_getinvolved_data_categories'
     - builder_table_update_pensoft_getinvolved_data_categories.php
+1.0.14:
+    - 'Fixed label'
