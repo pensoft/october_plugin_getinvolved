@@ -1,0 +1,12 @@
+list: $/pensoft/getinvolved/models/recipient/columns.yaml
+modelClass: Pensoft\GetInvolved\Models\Recipient
+title: Recipients
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'pensoft/getinvolved/recipients/update/:id'

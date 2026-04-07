@@ -1,0 +1,10 @@
+name: Recipients
+form: $/pensoft/getinvolved/models/recipient/fields.yaml
+modelClass: Pensoft\GetInvolved\Models\Recipient
+defaultRedirect: pensoft/getinvolved/recipients
+create:
+    redirect: 'pensoft/getinvolved/recipients/update/:id'
+    redirectClose: pensoft/getinvolved/recipients
+update:
+    redirect: pensoft/getinvolved/recipients
+    redirectClose: pensoft/getinvolved/recipients

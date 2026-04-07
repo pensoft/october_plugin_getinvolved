@@ -1,0 +1,40 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    email:
+        label: Email
+        span: auto
+        type: text
+    affiliation:
+        label: Affiliation
+        span: auto
+        type: text
+    country:
+        label: Country
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    interest:
+        label: Interests
+        nameFrom: name
+        descriptionFrom: description
+        span: left
+        type: relation
+    category:
+        label: 'Category/categories of interest'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        comment: 'Select the category/categories which best describe you.'
+    project_events:
+        label: 'I consent to receive invitations and information about project events.'
+        span: auto
+        type: switch
+    external_events:
+        label: 'I consent to receive invitations and information about relevant events from external projects.'
+        span: auto
+        type: switch
